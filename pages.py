@@ -21,11 +21,6 @@ class UrbanRoutesPage:
         "//div[contains(@class, 'tcard-title') and text()='Comfort']"
     )
 
-    comfort_active = (
-        By.XPATH,
-        "//div[contains(@class, 'active')]"
-    )
-
     phone_button = (
         By.XPATH,
         "//div[contains(text(), 'Número de telefone')]"
@@ -155,18 +150,12 @@ class UrbanRoutesPage:
         self._click(self.comfort_icon)
 
     def is_comfort_selected(self):
-        try:
-            active_card = self.driver.find_element(
-                *self.comfort_active
-            )
-
-            return (
-                "active"
-                in active_card.get_attribute("class")
-            )
-
-        except:
-            return False
+        comfort_title = self._find(self.comfort_icon)
+        comfort_card = comfort_title.find_element(
+            By.XPATH,
+            "./ancestor::div[contains(@class, 'tcard')][1]"
+        )
+        return "active" in comfort_card.get_attribute("class").split()
 
     # TELEFONE
 
