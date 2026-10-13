@@ -181,7 +181,6 @@ class UrbanRoutesPage:
         self._click(self.add_card)
 
     def add_credit_card(self, number, code):
-
         self.driver.find_element(
             *self.card_number_field
         ).send_keys(number)
@@ -196,22 +195,9 @@ class UrbanRoutesPage:
         ][0]
 
         visible_code_field.send_keys(code)
-
         visible_code_field.send_keys(Keys.TAB)
 
         time.sleep(2)
-
-        print(
-            "Numero:",
-            self.driver.find_element(
-                *self.card_number_field
-            ).get_attribute("value")
-        )
-
-        print(
-            "CVV:",
-            visible_code_field.get_attribute("value")
-        )
 
         self._click(self.add_card_button)
 
@@ -238,7 +224,6 @@ class UrbanRoutesPage:
     # COBERTOR E LENÇOS
 
     def order_blanket_and_handkerchiefs(self):
-
         element = self.driver.find_element(
             *self.blanket_switch
         )
@@ -249,7 +234,6 @@ class UrbanRoutesPage:
         )
 
     def is_blanket_and_handkerchiefs_selected(self):
-
         return self.driver.find_element(
             *self.blanket_switch
         ).is_selected()
@@ -257,7 +241,6 @@ class UrbanRoutesPage:
     # SORVETES
 
     def order_2_ice_creams(self):
-
         plus_button = WebDriverWait(
             self.driver,
             5
@@ -271,7 +254,6 @@ class UrbanRoutesPage:
             plus_button.click()
 
     def get_ice_cream_count(self):
-
         values = self.driver.find_elements(
             By.CSS_SELECTOR,
             ".counter-value"
@@ -290,10 +272,7 @@ class UrbanRoutesPage:
                 *self.car_search_title
             )
 
-            return (
-                "Buscar carro"
-                in element.text
-            )
+            return "Buscar carro" in element.text
 
         except:
             return False
