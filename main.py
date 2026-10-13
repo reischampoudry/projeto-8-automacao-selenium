@@ -11,19 +11,19 @@ class TestUrbanRoutes:
 
     @classmethod
     def setup_class(cls):
-        from selenium.webdriver import DesiredCapabilities
-
-        capabilities = DesiredCapabilities.CHROME
-        capabilities["goog:loggingPrefs"] = {
-            "performance": "ALL"
-        }
+        options = webdriver.ChromeOptions()
+        options.set_capability(
+            "goog:loggingPrefs",
+            {"performance": "ALL"}
+        )
 
         service = Service(
             ChromeDriverManager().install()
         )
 
         cls.driver = webdriver.Chrome(
-            service=service
+            service=service,
+            options=options
         )
 
         cls.driver.implicitly_wait(5)
